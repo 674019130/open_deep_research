@@ -1,66 +1,59 @@
 # Open Deep Research Repository Overview
 
 ## Project Description
-Open Deep Research is a configurable, fully open-source deep research agent that works across multiple model providers, search tools, and MCP (Model Context Protocol) servers. It enables automated research with parallel processing and comprehensive report generation.
+Open Deep Research 是一套可配置的自动化研究代理，支持多种模型提供方、搜索接口与 MCP（Model Context Protocol）服务器，可用于快速搭建端到端的深度研究流程。
 
 ## Repository Structure
 
 ### Root Directory
-- `README.md` - Comprehensive project documentation with quickstart guide
-- `pyproject.toml` - Python project configuration and dependencies
-- `langgraph.json` - LangGraph configuration defining the main graph entry point
-- `uv.lock` - UV package manager lock file
-- `LICENSE` - MIT license
-- `.env.example` - Environment variables template (not tracked)
+- `README.md` - 项目说明与快速开始
+- `pyproject.toml` - Python 项目配置
+- `langgraph.json` - 图工作流入口定义
+- `uv.lock` - UV 包依赖锁定文件
+- `LICENSE` - 许可证
+- `.env.example` - 环境变量示例（未跟踪）
 
 ### Core Implementation (`src/open_deep_research/`)
-- `deep_researcher.py` - Main LangGraph implementation (entry point: `deep_researcher`)
-- `configuration.py` - Configuration management and settings
-- `state.py` - Graph state definitions and data structures  
-- `prompts.py` - System prompts and prompt templates
-- `utils.py` - Utility functions and helpers
-- `files/` - Research output and example files
+- `deep_researcher.py` - 主图工作流（入口：`deep_researcher`）
+- `configuration.py` - 统一的配置管理
+- `state.py` - 工作流状态与数据结构
+- `prompts.py` - 系统提示词与模版
+- `utils.py` - 辅助函数集合
+- `files/` - 样例输出与附加文件
 
 ### Legacy Implementations (`src/legacy/`)
-Contains two earlier research implementations:
-- `graph.py` - Plan-and-execute workflow with human-in-the-loop
-- `multi_agent.py` - Supervisor-researcher multi-agent architecture
-- `legacy.md` - Documentation for legacy implementations
-- `CLAUDE.md` - Legacy-specific Claude instructions
-- `tests/` - Legacy-specific tests
+包含两套历史实现：
+- `graph.py` - 计划—执行式工作流
+- `multi_agent.py` - 监督者-研究员多代理架构
+- `legacy.md`、`CLAUDE.md` - 旧版文档
+- `tests/` - 旧版评估脚本
 
 ### Security (`src/security/`)
-- `auth.py` - Authentication handler for LangGraph deployment
+- `auth.py` - 本地部署用的认证逻辑
 
 ### Testing (`tests/`)
-- `run_evaluate.py` - Main evaluation script configured to run on deep research bench
-- `evaluators.py` - Specialized evaluation functions  
-- `prompts.py` - Evaluation prompts and criteria
-- `pairwise_evaluation.py` - Comparative evaluation tools
-- `supervisor_parallel_evaluation.py` - Multi-threaded evaluation
+- `run_evaluate.py` - 评估脚本
+- `evaluators.py`、`prompts.py` 等 - 测试与比对工具
 
 ### Examples (`examples/`)
-- `arxiv.md` - ArXiv research example
-- `pubmed.md` - PubMed research example
-- `inference-market.md` - Inference market analysis examples
+- `arxiv.md`、`pubmed.md` 等示例研究场景
 
 ## Key Technologies
-- **LangGraph** - Workflow orchestration and graph execution
-- **LangChain** - LLM integration and tool calling
-- **Multiple LLM Providers** - OpenAI, Anthropic, Google, Groq, DeepSeek support
-- **Search APIs** - Tavily, OpenAI/Anthropic native search, DuckDuckGo, Exa
-- **MCP Servers** - Model Context Protocol for extended capabilities
+- **图工作流引擎**：用于编排多节点研究流程
+- **多家模型 API**：OpenAI、Anthropic、Google、DeepSeek 等
+- **搜索服务**：Tavily 以及原生搜索接口
+- **MCP 服务器**：扩展外部工具访问能力
 
 ## Development Commands
-- `uvx langgraph dev` - Start development server with LangGraph Studio
-- `python tests/run_evaluate.py` - Run comprehensive evaluations
-- `ruff check` - Code linting
-- `mypy` - Type checking
+- `uvx langgraph dev` - 启动本地可视化调试环境
+- `python tests/run_evaluate.py` - 执行完整评估
+- `uv run ruff check .` - 代码静态检查
+- `uv run mypy src` - 类型检查
 
 ## Configuration
-All settings configurable via:
-- Environment variables (`.env` file)
-- Web UI in LangGraph Studio
-- Direct configuration modification
+配置方式包括：
+- 环境变量（`.env`）
+- Studio UI 中的可视化配置面板
+- 直接修改 `configuration.py`
 
-Key settings include model selection, search API choice, concurrency limits, and MCP server configurations.
+常见可调项覆盖模型选择、搜索设置、并发数量和 MCP 相关参数。
